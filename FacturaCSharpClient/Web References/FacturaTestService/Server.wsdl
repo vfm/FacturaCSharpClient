@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://test.factura.ag/soap/index" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="Server" targetNamespace="https://test.factura.ag/soap/index" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://test.factura.ag/soap/index" />
+  </wsdl:types>
+  <wsdl:message name="loginIn">
+    <wsdl:part name="benutzername" type="xsd:string" />
+    <wsdl:part name="passwort" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="logoutIn" />
+  <wsdl:message name="logoutOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getKundeIn">
+    <wsdl:part name="id_kunde" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getKundeOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="setKundeIn">
+    <wsdl:part name="array" type="soap-enc:Array" />
+    <wsdl:part name="neuanlage" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="setKundeOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="setRechnungIn">
+    <wsdl:part name="array" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="setRechnungOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungsturnusIn">
+    <wsdl:part name="id_rechnungsturnus" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungsturnusOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="setRechnungsturnusIn">
+    <wsdl:part name="array" type="soap-enc:Array" />
+    <wsdl:part name="neuanlage" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="setRechnungsturnusOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getInfoboxIn" />
+  <wsdl:message name="getInfoboxOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="rechnungStornierenIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+    <wsdl:part name="teilstorno" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="rechnungStornierenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="rechnungMahnenIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="rechnungMahnenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="rechnungMahnverzoegerungIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+    <wsdl:part name="weiterbelasten" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="rechnungMahnverzoegerungOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="rechnungInkassoIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+    <wsdl:part name="id_vertragsart" type="xsd:int" />
+    <wsdl:part name="vertragsdatum" type="xsd:string" />
+    <wsdl:part name="telefoninkasso" type="xsd:string" />
+    <wsdl:part name="ratenzahlung" type="xsd:string" />
+    <wsdl:part name="kontaktdaten" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="rechnungInkassoOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="rechnungDirektBezahltIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="rechnungDirektBezahltOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="findKundeIn">
+    <wsdl:part name="suchtext" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="findKundeOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="findKundeDoubletteIn">
+    <wsdl:part name="vorname" type="xsd:string" />
+    <wsdl:part name="nachname" type="xsd:string" />
+    <wsdl:part name="strasse" type="xsd:string" />
+    <wsdl:part name="hausnummer" type="xsd:string" />
+    <wsdl:part name="plz" type="xsd:string" />
+    <wsdl:part name="ort" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="findKundeDoubletteOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getKundenIn">
+    <wsdl:part name="archiv" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getKundenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungenIn" />
+  <wsdl:message name="getRechnungenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getRechnungsturnusseIn" />
+  <wsdl:message name="getRechnungsturnusseOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="verguetungsvereinbarungErzeugenIn">
+    <wsdl:part name="id_kunde" type="xsd:int" />
+    <wsdl:part name="id_vertragsart" type="xsd:int" />
+    <wsdl:part name="umsatz" type="xsd:double" />
+    <wsdl:part name="raten" type="xsd:int" />
+    <wsdl:part name="faelligkeit" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="verguetungsvereinbarungErzeugenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="forderungsverkaufIn">
+    <wsdl:part name="array" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="forderungsverkaufOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="bonitaetPruefenIn">
+    <wsdl:part name="id_kunde" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="bonitaetPruefenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getPdfRechnungIn">
+    <wsdl:part name="id_rechnung" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPdfRechnungOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getPdfMahnungIn">
+    <wsdl:part name="id_mahnung" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPdfMahnungOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getPdfMandatIn">
+    <wsdl:part name="mandat_referenznummer" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getPdfMandatOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getBankdatenIn">
+    <wsdl:part name="blzOderBic" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getBankdatenOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="getIbanBicIn">
+    <wsdl:part name="blz" type="xsd:int" />
+    <wsdl:part name="kontonummer" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getIbanBicOut">
+    <wsdl:part name="return" type="soap-enc:Array" />
+  </wsdl:message>
+  <wsdl:message name="ergebnisIn">
+    <wsdl:part name="ergebnisSchluessel" type="xsd:anyType" />
+    <wsdl:part name="durchschlag" type="xsd:anyType" />
+    <wsdl:part name="textZusatz" type="xsd:anyType" />
+    <wsdl:part name="fehler" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="ergebnisTextIn">
+    <wsdl:part name="loginErgebnisSchluessel" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:portType name="ServerPort">
+    <wsdl:operation name="login">
+      <documentation>Einloggen, um den Webservice nutzen zu können</documentation>
+      <wsdl:input message="tns:loginIn" />
+      <wsdl:output message="tns:loginOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <documentation>Ermöglicht die Nutztung der API als verschiedene Benutzer.</documentation>
+      <wsdl:input message="tns:logoutIn" />
+      <wsdl:output message="tns:logoutOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getKunde">
+      <documentation>Liefert die Daten eines Kunden</documentation>
+      <wsdl:input message="tns:getKundeIn" />
+      <wsdl:output message="tns:getKundeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setKunde">
+      <documentation>Schreibt einen Kunden</documentation>
+      <wsdl:input message="tns:setKundeIn" />
+      <wsdl:output message="tns:setKundeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRechnung">
+      <documentation>Liefert die Daten einer Rechnung</documentation>
+      <wsdl:input message="tns:getRechnungIn" />
+      <wsdl:output message="tns:getRechnungOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setRechnung">
+      <documentation>Legt eine neue Rechnung an.</documentation>
+      <wsdl:input message="tns:setRechnungIn" />
+      <wsdl:output message="tns:setRechnungOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungsturnus">
+      <documentation>Liefert die Daten eines Rechnungstunus</documentation>
+      <wsdl:input message="tns:getRechnungsturnusIn" />
+      <wsdl:output message="tns:getRechnungsturnusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setRechnungsturnus">
+      <documentation>Legt einen neuen Rechnungstunus an bzw. verändert einen bestehenden.</documentation>
+      <wsdl:input message="tns:setRechnungsturnusIn" />
+      <wsdl:output message="tns:setRechnungsturnusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getInfobox">
+      <documentation>Die Rechnungen werden in drei benannten Unter-Arrays zurückgeliefert.</documentation>
+      <wsdl:input message="tns:getInfoboxIn" />
+      <wsdl:output message="tns:getInfoboxOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rechnungStornieren">
+      <documentation>Storniert die angegebene Rechnung.</documentation>
+      <wsdl:input message="tns:rechnungStornierenIn" />
+      <wsdl:output message="tns:rechnungStornierenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rechnungMahnen">
+      <documentation>Mahnt die angegebene Rechnung an, vorausgesetzt sie befindet sich aktuell in der Infobox.</documentation>
+      <wsdl:input message="tns:rechnungMahnenIn" />
+      <wsdl:output message="tns:rechnungMahnenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rechnungMahnverzoegerung">
+      <documentation>Gleichzeitig verschwindet die Rechnung aus der Infobox.  Dies soll dem Kunden Zeit zum Überweisen des ausstehenden Betrages geben.</documentation>
+      <wsdl:input message="tns:rechnungMahnverzoegerungIn" />
+      <wsdl:output message="tns:rechnungMahnverzoegerungOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rechnungInkasso">
+      <documentation>Beauftragt das Inkassoverfahren</documentation>
+      <wsdl:input message="tns:rechnungInkassoIn" />
+      <wsdl:output message="tns:rechnungInkassoOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rechnungDirektBezahlt">
+      <documentation>Ggf. bereits bezahlte Beträge werden an den Makler ausbezahlt, es erfolgen keine Mahnungen etc. mehr.</documentation>
+      <wsdl:input message="tns:rechnungDirektBezahltIn" />
+      <wsdl:output message="tns:rechnungDirektBezahltOut" />
+    </wsdl:operation>
+    <wsdl:operation name="findKunde">
+      <documentation>Liefert Kunden, die zu dem Suchtext passen</documentation>
+      <wsdl:input message="tns:findKundeIn" />
+      <wsdl:output message="tns:findKundeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="findKundeDoublette">
+      <documentation>Um Doubletten im Kundenbestand zu vermeiden sollte so vor der Neuanlage eines Kunden geprüft werden, ob dieser bereits existiert. Wurden keine Übereinstimmungen gefunden so wird ein leeres Array zurückgegeben.</documentation>
+      <wsdl:input message="tns:findKundeDoubletteIn" />
+      <wsdl:output message="tns:findKundeDoubletteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getKunden">
+      <documentation>Liefert eine Liste aller aktiver ODER archivierter Kunden die dem eingeloggten Benutzer zur Verfügung stehen.</documentation>
+      <wsdl:input message="tns:getKundenIn" />
+      <wsdl:output message="tns:getKundenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungen">
+      <documentation>Liefert eine Liste aller Rechnungen die dem eingeloggten Benutzer zur Verfügung stehen.</documentation>
+      <wsdl:input message="tns:getRechnungenIn" />
+      <wsdl:output message="tns:getRechnungenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungsturnusse">
+      <documentation>Liefert eine Liste aller Rechnungsturnusse die dem eingeloggten Benutzer zur Verfügung stehen.</documentation>
+      <wsdl:input message="tns:getRechnungsturnusseIn" />
+      <wsdl:output message="tns:getRechnungsturnusseOut" />
+    </wsdl:operation>
+    <wsdl:operation name="verguetungsvereinbarungErzeugen">
+      <documentation>Erzeugt ein Vergütungsvereinbarungs-PDF</documentation>
+      <wsdl:input message="tns:verguetungsvereinbarungErzeugenIn" />
+      <wsdl:output message="tns:verguetungsvereinbarungErzeugenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="forderungsverkauf">
+      <documentation>Beantragt den Verkauf einer Forderung</documentation>
+      <wsdl:input message="tns:forderungsverkaufIn" />
+      <wsdl:output message="tns:forderungsverkaufOut" />
+    </wsdl:operation>
+    <wsdl:operation name="bonitaetPruefen">
+      <documentation>Führt eine Bonitätsprüfung zu dem Kunden durch.</documentation>
+      <wsdl:input message="tns:bonitaetPruefenIn" />
+      <wsdl:output message="tns:bonitaetPruefenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPdfRechnung">
+      <documentation>Liefert das Rechnungs-PDF zur gegebenen Rechnungs-ID</documentation>
+      <wsdl:input message="tns:getPdfRechnungIn" />
+      <wsdl:output message="tns:getPdfRechnungOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPdfMahnung">
+      <documentation>Liefert das Mahnungs-PDF zur gegebenen Mahnungs-ID</documentation>
+      <wsdl:input message="tns:getPdfMahnungIn" />
+      <wsdl:output message="tns:getPdfMahnungOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPdfMandat">
+      <documentation>Die Mandats-Referenznummer erhält man u. A. aus der Bankverbindung eines Kunden.</documentation>
+      <wsdl:input message="tns:getPdfMandatIn" />
+      <wsdl:output message="tns:getPdfMandatOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBankdaten">
+      <documentation>Liefert die BIC und Adressdaten zur gegebenen Bankleitzahl oder BIC</documentation>
+      <wsdl:input message="tns:getBankdatenIn" />
+      <wsdl:output message="tns:getBankdatenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getIbanBic">
+      <documentation>Liefert die IBAN und BIC zur gegebenen Bankverbindung</documentation>
+      <wsdl:input message="tns:getIbanBicIn" />
+      <wsdl:output message="tns:getIbanBicOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ergebnis">
+      <documentation>/***/</documentation>
+      <wsdl:input message="tns:ergebnisIn" />
+    </wsdl:operation>
+    <wsdl:operation name="ergebnisText">
+      <documentation>/***/</documentation>
+      <wsdl:input message="tns:ergebnisTextIn" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServerBinding" type="tns:ServerPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="login">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#login" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#logout" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getKunde">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getKunde" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setKunde">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#setKunde" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRechnung">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getRechnung" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setRechnung">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#setRechnung" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungsturnus">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getRechnungsturnus" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setRechnungsturnus">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#setRechnungsturnus" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInfobox">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getInfobox" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechnungStornieren">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#rechnungStornieren" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechnungMahnen">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#rechnungMahnen" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechnungMahnverzoegerung">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#rechnungMahnverzoegerung" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechnungInkasso">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#rechnungInkasso" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechnungDirektBezahlt">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#rechnungDirektBezahlt" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findKunde">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#findKunde" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findKundeDoublette">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#findKundeDoublette" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getKunden">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getKunden" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungen">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getRechnungen" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRechnungsturnusse">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getRechnungsturnusse" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verguetungsvereinbarungErzeugen">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#verguetungsvereinbarungErzeugen" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="forderungsverkauf">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#forderungsverkauf" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bonitaetPruefen">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#bonitaetPruefen" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPdfRechnung">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getPdfRechnung" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPdfMahnung">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getPdfMahnung" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPdfMandat">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getPdfMandat" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBankdaten">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getBankdaten" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIbanBic">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#getIbanBic" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ergebnis">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#ergebnis" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ergebnisText">
+      <soap:operation soapAction="https://test.factura.ag/soap/index#ergebnisText" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://test.factura.ag/soap/index" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServerService">
+    <wsdl:port name="ServerPort" binding="tns:ServerBinding">
+      <soap:address location="https://test.factura.ag/soap/index" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
